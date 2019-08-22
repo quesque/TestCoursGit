@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `animal` (
   `image` varchar(50) NOT NULL,
   PRIMARY KEY (`idAnimal`),
   KEY `FK_TYPE` (`idType`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `animal`
@@ -50,7 +50,11 @@ INSERT INTO `animal` (`idAnimal`, `nom`, `age`, `sexe`, `idType`, `image`) VALUE
 (3, 'Mina', 2, 0, 1, 'Mina/Mina.jpg'),
 (4, 'Felicia', 4, 0, 2, 'Felicia/Felicia.jpg'),
 (5, 'Lili', 1, 0, 2, 'Lili/Lili.jpg'),
-(6, 'Hoquet', 7, 1, 1, 'Hoquet/Hoquet.jpg');
+(6, 'Hoquet', 7, 1, 1, 'Hoquet/Hoquet.jpg'),
+(7, 'Cacahouette', 2, 1, 3, 'Cacahouette/Cacahouette.jpg'),
+(8, 'Snoopy', 1, 0, 3, 'Snoopy/Snoopy.jpg'),
+(9, 'Lola', 4, 0, 1, 'Lola/Lola.jpg')
+;
 
 -- --------------------------------------------------------
 
@@ -71,7 +75,9 @@ CREATE TABLE IF NOT EXISTS `type` (
 
 INSERT INTO `type` (`idType`, `libelle`) VALUES
 (1, 'chien'),
-(2, 'chat');
+(2, 'chat'),
+(3, 'lapin')
+;
 
 --
 -- Contraintes pour les tables déchargées
