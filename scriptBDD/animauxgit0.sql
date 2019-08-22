@@ -35,26 +35,26 @@ CREATE TABLE IF NOT EXISTS `animal` (
   `age` int(11) NOT NULL,
   `sexe` tinyint(1) NOT NULL,
   `idType` int(11) NOT NULL,
-  `idImage` int(11) NOT NULL,
+  
   PRIMARY KEY (`idAnimal`),
-  KEY `FK_TYPE` (`idType`),
-  KEY `FK_IMAGE` (`idImage`)
+  KEY `FK_TYPE` (`idType`)
+ 
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `animal`
 --
 
-INSERT INTO `animal` (`idAnimal`, `nom`, `age`, `sexe`, `idType`, `idImage`) VALUES
-(1, 'Tya', 7, 0, 2, 1),
-(2, 'Milo', 3, 1, 2, 2),
-(3, 'Mina', 2, 0, 1, 3),
-(4, 'Felicia', 4, 0, 2, 4),
-(5, 'Lili', 1, 0, 2, 5),
-(6, 'Hoquet', 7, 1, 1, 6),
-(7, 'Cacahouette', 2, 1, 3, 7),
-(8, 'Snoopy', 1, 0, 3, 8),
-(9, 'Lola', 4, 0, 1, 9)
+INSERT INTO `animal` (`idAnimal`, `nom`, `age`, `sexe`, `idType`) VALUES
+(1, 'Tya', 7, 0, 2),
+(2, 'Milo', 3, 1, 2),
+(3, 'Mina', 2, 0, 1),
+(4, 'Felicia', 4, 0, 2),
+(5, 'Lili', 1, 0, 2),
+(6, 'Hoquet', 7, 1, 1),
+(7, 'Cacahouette', 2, 1, 3),
+(8, 'Snoopy', 1, 0, 3),
+(9, 'Lola', 4, 0, 1)
 ;
 
 -- --------------------------------------------------------
@@ -106,6 +106,42 @@ INSERT INTO `image` (`idImage`, `chemin`) VALUES
 (8, 'Snoopy/Snoopy.jpg'),
 (9, 'Lola/Lola.jpg')
 ;
+
+
+--
+-- Structure de la table `image_animal`
+--
+
+DROP TABLE IF EXISTS `image_animal`;
+CREATE TABLE IF NOT EXISTS `image_animal` (
+  `idImage` int(11) NOT NULL,
+  `idAnimal` int(11) NOT NULL,
+  PRIMARY KEY (`idImage`,`idAnimal`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `image`
+--
+
+INSERT INTO `image_animal` (`idImage`, `idAnimal`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(1, 2),
+(2, 3),
+(3, 4),
+(4, 5),
+(5, 6),
+(6, 7),
+(7, 8),
+(8, 9)
+;
 --
 -- Contraintes pour les tables déchargées
 --
@@ -116,9 +152,11 @@ INSERT INTO `image` (`idImage`, `chemin`) VALUES
 ALTER TABLE `animal`
   ADD CONSTRAINT `FK_TYPE` FOREIGN KEY (`idType`) REFERENCES `type` (`idType`);
   
-ALTER TABLE `animal`
+ALTER TABLE `image_animal`
   ADD CONSTRAINT `FK_IMAGE` FOREIGN KEY (`idImage`) REFERENCES `image` (`idImage`);
-  
+
+ALTER TABLE `image_animal`
+  ADD CONSTRAINT `FK_ANIMAL` FOREIGN KEY (`idAnimal`) REFERENCES `animal` (`idAnimal`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
