@@ -35,25 +35,26 @@ CREATE TABLE IF NOT EXISTS `animal` (
   `age` int(11) NOT NULL,
   `sexe` tinyint(1) NOT NULL,
   `idType` int(11) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `idImage` int(11) NOT NULL,
   PRIMARY KEY (`idAnimal`),
-  KEY `FK_TYPE` (`idType`)
+  KEY `FK_TYPE` (`idType`),
+  KEY `FK_IMAGE` (`idImage`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `animal`
 --
 
-INSERT INTO `animal` (`idAnimal`, `nom`, `age`, `sexe`, `idType`, `image`) VALUES
-(1, 'Tya', 7, 0, 2, 'Tya/Tya.jpg'),
-(2, 'Milo', 3, 1, 2, 'Milo/Milo.jpg'),
-(3, 'Mina', 2, 0, 1, 'Mina/Mina.jpg'),
-(4, 'Felicia', 4, 0, 2, 'Felicia/Felicia.jpg'),
-(5, 'Lili', 1, 0, 2, 'Lili/Lili.jpg'),
-(6, 'Hoquet', 7, 1, 1, 'Hoquet/Hoquet.jpg'),
-(7, 'Cacahouette', 2, 1, 3, 'Cacahouette/Cacahouette.jpg'),
-(8, 'Snoopy', 1, 0, 3, 'Snoopy/Snoopy.jpg'),
-(9, 'Lola', 4, 0, 1, 'Lola/Lola.jpg')
+INSERT INTO `animal` (`idAnimal`, `nom`, `age`, `sexe`, `idType`, `idImage`) VALUES
+(1, 'Tya', 7, 0, 2, 1),
+(2, 'Milo', 3, 1, 2, 2),
+(3, 'Mina', 2, 0, 1, 3),
+(4, 'Felicia', 4, 0, 2, 4),
+(5, 'Lili', 1, 0, 2, 5),
+(6, 'Hoquet', 7, 1, 1, 6),
+(7, 'Cacahouette', 2, 1, 3, 7),
+(8, 'Snoopy', 1, 0, 3, 8),
+(9, 'Lola', 4, 0, 1, 9)
 ;
 
 -- --------------------------------------------------------
@@ -80,6 +81,32 @@ INSERT INTO `type` (`idType`, `libelle`) VALUES
 ;
 
 --
+-- Structure de la table `image`
+--
+
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE IF NOT EXISTS `image` (
+  `idImage` int(11) NOT NULL AUTO_INCREMENT,
+  `chemin` varchar(50) NOT NULL,
+  PRIMARY KEY (`idImage`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `image`
+--
+
+INSERT INTO `image` (`idImage`, `chemin`) VALUES
+(1, 'Tya/Tya.jpg'),
+(2, 'Milo/Milo.jpg'),
+(3, 'Mina/Mina.jpg'),
+(4, 'Felicia/Felicia.jpg'),
+(5, 'Lili/Lili.jpg'),
+(6, 'Hoquet/Hoquet.jpg'),
+(7, 'Cacahouette/Cacahouette.jpg'),
+(8, 'Snoopy/Snoopy.jpg'),
+(9, 'Lola/Lola.jpg')
+;
+--
 -- Contraintes pour les tables déchargées
 --
 
@@ -88,6 +115,10 @@ INSERT INTO `type` (`idType`, `libelle`) VALUES
 --
 ALTER TABLE `animal`
   ADD CONSTRAINT `FK_TYPE` FOREIGN KEY (`idType`) REFERENCES `type` (`idType`);
+  
+ALTER TABLE `animal`
+  ADD CONSTRAINT `FK_IMAGE` FOREIGN KEY (`idImage`) REFERENCES `image` (`idImage`);
+  
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
